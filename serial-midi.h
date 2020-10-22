@@ -132,17 +132,17 @@ public:
 	char * Text(); // Text Representation of the Class status  
 
 	// Channel mode messages
-	void NoteON( 	class channel, uint8_t key, uint8_t velocity);
-	void NoteOFF(	class channel, uint8_t key, uint8_t velocity);
-	void ControlChange(class channel, uint8_t controller, uint8_t val);
-	void PitchWheel(class channel, uint16_t val);
-	void PitchWheel(class channel, int16_t val);	
-	void ModWheel(	class channel, uint16_t val);
-	void ModWheel(	class channel, uint8_t val); // Only MSB sent 8 bits
-	void ModWheel(	class channel, int val) { 
+	void NoteON( 	uint8_t channel, uint8_t key, uint8_t velocity);
+	void NoteOFF(	uint8_t channel, uint8_t key, uint8_t velocity);
+	void ControlChange(uint8_t channel, uint8_t controller, uint8_t val);
+	void PitchWheel(uint8_t channel, uint16_t val);
+	void PitchWheel(uint8_t channel, int16_t val);	
+	void ModWheel(	uint8_t channel, uint16_t val);
+	void ModWheel(	uint8_t channel, uint8_t val); // Only MSB sent 8 bits
+	void ModWheel(	uint8_t channel, int val) { 
 		SerialMidi::ModWheel(channel,(uint8_t)val); 
 	}
-	void ChannelAfterTouch(class channel, uint8_t val);
+	void ChannelAfterTouch(uint8_t channel, uint8_t val);
 
 	// System Common messages
 	void TimingClock(void);
@@ -152,7 +152,7 @@ public:
 	void Active_Sensing(void);
 	void Reset(void);
 
-	enum class Midi_state_machine {
+	enum Midi_state_machine {
     	RESET,
     	RX_1_SYSEX_BYTE,
     	HANDLE_SYSEX,

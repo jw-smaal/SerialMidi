@@ -48,11 +48,11 @@ SerialMidi::SerialMidi (
 	global_3rd_byte_flag = 0;
 	global_midi_c2 = 0;
 	global_midi_c3 = 0;
-	global_midi_state = RESET; 
+	//global_midi_state = RESET; 
 }
 
 
-void SerialMidi::NoteON(class Channel channel, uint8_t key, uint8_t velocity)
+void SerialMidi::NoteON(uint8_t channel, uint8_t key, uint8_t velocity)
 {
 	uint8_t buf[4]; 
 
@@ -71,7 +71,7 @@ void SerialMidi::NoteON(class Channel channel, uint8_t key, uint8_t velocity)
 }
 
 
-void SerialMidi::NoteOFF(class Channel channel, uint8_t key, uint8_t velocity)
+void SerialMidi::NoteOFF(uint8_t channel, uint8_t key, uint8_t velocity)
 {
 	uint8_t buf[4]; 
 
@@ -90,7 +90,7 @@ void SerialMidi::NoteOFF(class Channel channel, uint8_t key, uint8_t velocity)
 }
 
 
-void SerialMidi::ControlChange(class Channel channel, uint8_t controller, uint8_t val)
+void SerialMidi::ControlChange(uint8_t channel, uint8_t controller, uint8_t val)
 {
 	uint8_t buf[4]; 
 	
@@ -109,7 +109,7 @@ void SerialMidi::ControlChange(class Channel channel, uint8_t controller, uint8_
 }
 
 
-void SerialMidi::ChannelAfterTouch(class Channel channel, uint8_t val)
+void SerialMidi::ChannelAfterTouch(uint8_t channel, uint8_t val)
 {
 
 	uint8_t buf[4]; 
@@ -132,7 +132,7 @@ void SerialMidi::ChannelAfterTouch(class Channel channel, uint8_t val)
  * range: 0 --> 16383
  * only a 14 bit value 
  */
-void SerialMidi::ModWheel(class Channel channel, uint16_t val)
+void SerialMidi::ModWheel(uint8_t channel, uint16_t val)
 {	
     ControlChange(channel, CTL_LSB_MODWHEEL,  ~(CHANNEL_VOICE_MASK) & val);
     ControlChange(channel, CTL_MSB_MODWHEEL,  ~(CHANNEL_VOICE_MASK) & (val>>7));
@@ -141,7 +141,7 @@ void SerialMidi::ModWheel(class Channel channel, uint16_t val)
 /* 
  * If we only want to send a MSB with a 8 bit value this one will be used 
  */
-void SerialMidi::ModWheel(class Channel channel, uint8_t val)
+void SerialMidi::ModWheel(uint8_t channel, uint8_t val)
 {	
     ControlChange(channel, CTL_MSB_MODWHEEL,  ~(CHANNEL_VOICE_MASK) & val);
 }
@@ -153,7 +153,7 @@ void SerialMidi::ModWheel(class Channel channel, uint8_t val)
  *       LOW   MIDDLE   HIGH
  * range: 0 --> 8192  --> 16383
  */
-void SerialMidi::PitchWheel(class Channel channel, uint16_t val)
+void SerialMidi::PitchWheel(uint8_t channel, uint16_t val)
 {
 	uint8_t buf[4]; 
 	
@@ -177,7 +177,7 @@ void SerialMidi::PitchWheel(class Channel channel, uint16_t val)
  *       LOW   MIDDLE   HIGH
  * range: -8192   0     8192 
  */
-void SerialMidi::PitchWheel(class Channel channel, int16_t val)
+void SerialMidi::PitchWheel(uint8_t channel, int16_t val)
 {
 	uint16_t pitch = uint16_t(val + 0x2000);	
 	PitchWheel(channel, pitch);
