@@ -239,7 +239,7 @@ public:
 
 	// Midi channel 1 == 0x00 
 	// Cause for frequent confusion so better to use the defines.  
-	enum class channel {
+	enum channel {
 			CH1   = 0,
 			CH2   = 1,
 			CH3   = 2,
