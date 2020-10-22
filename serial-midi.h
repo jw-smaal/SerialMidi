@@ -152,7 +152,7 @@ public:
 	void Active_Sensing(void);
 	void Reset(void);
 
-	enum midi_state_machine {
+	enum class midi_state_machine {
     	RESET,
     	RX_1_SYSEX_BYTE,
     	HANDLE_SYSEX,
@@ -162,7 +162,7 @@ public:
     	RX_2_DATA_BYTE
 	};
 
-	enum midi_control_change {
+	enum class midi_control_change {
 		CTL_MSB_BANK             = 0x00,  // Bank Selection
 		CTL_MSB_MODWHEEL         = 0x01,  // Modulation
 		CTL_MSB_BREATH           = 0x02,  // Breath
@@ -239,7 +239,7 @@ public:
 
 	// Midi channel 1 == 0x00 
 	// Cause for frequent confusion so better to use the defines.  
-	enum channel {
+	enum class channel {
 			CH1   = 0,
 			CH2   = 1,
 			CH3   = 2,
