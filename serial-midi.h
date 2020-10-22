@@ -50,7 +50,6 @@ See the License for the specific language governing permissions and limitations 
  *
  *  Created by Jan-Willem Smaal on 21/12/14.
  *  ported to C++ on 20 Oct 2020 
- *  MIT LICENSE 
  */
 #ifndef _SERIAL_USART_MIDI
 #define _SERIAL_USART_MIDI
