@@ -231,12 +231,11 @@ char * SerialMidi::Text()
 {
 	static char buf[64];
 	snprintf(buf, 64,
-			"run_tx:%2X,run_rx:%2X,3rd_byte:%2X,state:%2X",  
+			"run_tx:%2X,run_rx:%2X,3rd_byte:%2X",  
 			global_running_status_tx, 
 			global_running_status_rx,
-			global_3rd_byte_flag,
-			global_midi_state
-		);
+			global_3rd_byte_flag) ); 
+			// FIXME  global_state
 	return buf; 
 }
 
