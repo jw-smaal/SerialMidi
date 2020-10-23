@@ -48,7 +48,7 @@ SerialMidi::SerialMidi (
 	global_3rd_byte_flag = 0;
 	global_midi_c2 = 0;
 	global_midi_c3 = 0;
-	//global_midi_state = RESET; 
+	global_state = SerialMidi::State_machine::RESET; 
 }
 
 

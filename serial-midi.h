@@ -152,7 +152,7 @@ public:
 	void Active_Sensing(void);
 	void Reset(void);
 
-	enum class Midi_state_machine {
+	enum class State_machine {
     	RESET,
     	RX_1_SYSEX_BYTE,
     	HANDLE_SYSEX,
@@ -276,7 +276,8 @@ private:
 	uint8_t global_3rd_byte_flag;
 	uint8_t global_midi_c2;
 	uint8_t global_midi_c3;
-	uint8_t global_midi_state;
+	//uint8_t global_midi_state;
+	State_machine global_state;	// Reference the enum Class 
 };
 
 #endif /* _SERIAL_USART_MIDI */
