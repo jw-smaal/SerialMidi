@@ -20,7 +20,7 @@ See the License for the specific language governing permissions and limitations 
  * follows the MIDI specification strictly and employs running_status 
  * reducing data transmissions considerably.     
  * 
- * ported from C avr to C++ on ARM mbed platform 
+ * ported from C avr (also by Jan-Willem Smaal) to C++ on ARM mbed platform 
  *
  *  Example:
  *  @code
@@ -60,16 +60,16 @@ See the License for the specific language governing permissions and limitations 
 #include "MK64F12.h"
 #include "mbed.h"
 
-// Hardware specific defines 
-// TODO: adjust for your board! 
+/** Adjust to your Hardware specific defines 
+ * TODO: adjust for your board! 
+ */
 #define USART_TX PTC17
 #define USART_RX PTC16 
 
 
 
-
 /*-----------------------------------------------------------------------*/
-// Defines
+// Old C style Defines
 
 /* 440 Hz for the A4 note */
 #define BASE_A4_NOTE 440
@@ -112,8 +112,29 @@ See the License for the specific language governing permissions and limitations 
 
 
 /*-----------------------------------------------------------------------*/
-//  Prototypes
 
+/** Forward declaration of callback functions. 
+ * users of this library must define all of these callbacks as they
+ * are called from the ReceiveParser. 
+ *
+ * TODO: There is a better way to code this instead of pointer to 
+ * functions.  
+ */  
+void realtime_handler(uint8_t msg);
+void midi_note_off_handler(uint8_t note, uint8_t velocity);
+void midi_note_on_handler(uint8_t note, uint8_t velocity);
+void midi_control_change_handler(uint8_t controller, uint8_t value);
+void midi_pitchwheel_handler(uint8_t valueLSB, uint8_t valueMSB);
+
+
+/** SerialMidi class implements MIDI over USART (serial) ports 
+ * it doesn't use the same methods as the USB-MIDI implementation.
+ * This class is optimized for strict MIDI 1.0 standards compliance 
+ * the parser is implemented as per the standard.  Data reduction is
+ * achieved by maintaining running status both on Rx and Tx. 
+ * 
+ * TODO: periodially send out running status byte if timer expires.  
+ */
 class SerialMidi {
 public: 
 	/**  During the SerialMidiInit the delegate callback functions need to be assigned
