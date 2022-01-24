@@ -57,14 +57,27 @@ See the License for the specific language governing permissions and limitations 
 // MBED OS Includes
 #include <cstdint>
 #include <stdint.h>
-#include "MK64F12.h"
-#include "mbed.h"
+
+
 
 /** Adjust to your Hardware specific defines 
  * TODO: adjust for your board! 
  */
-#define USART_TX PTC17
-#define USART_RX PTC16 
+#define K64 0 
+#define K66 1 
+
+#if K64 
+  #include "MK64F12.h"
+  #define USART_TX PTC17
+  #define USART_RX PTC16 
+#elif K66
+  #include "MK66F18.h"
+  #define USART_TX PTC4
+  #define USART_RX PTC3 
+#endif 
+
+#include "mbed.h"
+
 
 
 
